@@ -4,7 +4,6 @@ const {connectMongoDb} =require("./connection");
 const userRouter =require("./routes/user");
 const {logReqRes} =require("./middlewares");
 
-
 const users =require("./MOCK_DATA.json");
 const { json } = require("body-parser");
 const { type } = require("os");
@@ -15,7 +14,8 @@ const app =express();
 const port =8000;
 
 //connection
-connectMongoDb('mongodb://127.0.0.1:27017/ninza4u');
+connectMongoDb('mongodb://127.0.0.1:27017/ninza4u').then(()=>console.log("mongo db connected")
+);
 
 //middleware plugin
 app.use(express.urlencoded({extended:false}));

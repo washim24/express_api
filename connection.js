@@ -4,6 +4,6 @@ async function connectMongoDb(url){
     return mongoose.connect(url)
 }
 
-module.export ={
+module.exports ={
     connectMongoDb,
 }

@@ -1,34 +1,25 @@
-const express =require("express");
-const {handleGetAllUsers,getUserById,handleUpdateUserById} =require('../controllers/user');
-const router =express.Router();
+const express = require("express");
 
+const {
+  handleGetAllUsers,
+  handleGetUserById,
+  handleUpdateUserById,
+  handleDeleteUser,
+  handleCreateNewUser
+} = require("../controllers/user");
+const router = express.Router();
 
+// Route to get all users
+router.route("/")
+.get(handleGetAllUsers)
+.post(handleCreateNewUser);
 
-
-router.get("/",handleGetAllUsers);
-
-// router.get("/",async(req,res)=>{
-    
-// const allDbUSer = await user.find({});
-//     // return res.json(users);
-//     const html =`
-//     <ul>    
-//         ${allDbUSer.map((user)=>`<li>${user.firstName} -- ${user.email} </li>`).join("'")}
-//     </ul>
-    
-//     `;
-//     res.send(html);
-// });
-
-
+// Route to handle specific user actions (get by ID and update by ID)
 router
 .route("/:id")
-.get(getUserById)
-.patch(handleUpdateUserById);
+.get(handleGetUserById)
+.patch(handleUpdateUserById)
+.delete(handleDeleteUser);
 
-
-router.delete("/:id",(req,res)=>{
-    return res.json({"status":"pending"});
-});
-
-module.exports =router;
+// Export the router
+module.exports = router;
